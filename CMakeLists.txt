@@ -9,6 +9,12 @@ find_package(Eigen3 REQUIRED)
 
 add_executable(BichromaticGeometricSpanner
         main.cpp
+        ColoredPoint.cpp
+        ColoredPoint.h
+        InputHelper.cpp
+        InputHelper.h
+        paperMath.cpp
+        paperMath.h
 )
 
 target_link_libraries(BichromaticGeometricSpanner
