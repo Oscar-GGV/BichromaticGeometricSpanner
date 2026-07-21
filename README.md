@@ -28,4 +28,9 @@ Dependencies:
 - C++20
 - CGAL (for points)
 - CMAKE
+
+Acknowledgements:
+This project was developed as part of a Summer 2026 Research Experiences for Undergraduates (REU) program at California State University, Northridge. The REU program is supported by the National Science Foundation (NSF).
+
+I would like to thank my faculty mentor, Csaba D. Tóth, for their guidance throughout this project.
   
