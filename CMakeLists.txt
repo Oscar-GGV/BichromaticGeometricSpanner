@@ -15,6 +15,12 @@ add_executable(BichromaticGeometricSpanner
         InputHelper.h
         paperMath.cpp
         paperMath.h
+        Tile.cpp
+        Tile.h
+        TileGrid.cpp
+        TileGrid.h
+        PairHash.cpp
+        PairHash.h
 )
 
 target_link_libraries(BichromaticGeometricSpanner
