@@ -5,7 +5,8 @@
 #ifndef BICHROMATICGEOMETRICSPANNER_TILE_H
 #define BICHROMATICGEOMETRICSPANNER_TILE_H
 #include "ColoredPoint.h"
-
+static constexpr int RED_SEEN = 1; //01
+static constexpr int BLUE_SEEN = 2; //10
 
 class Tile
 {
@@ -22,11 +23,19 @@ public:
 
     int getJ() const;
 
+    int colorFlag() const; //0 = empty, 1= red, 2 = blue, 3 = bichromatic
+
+    bool isMonochromatic() const; //true if 1 or 2 and non empty
+
+    bool isBichromatic() const; //true if 3
+
 private:
 
     int i_, j_;
 
     std::vector<ColoredPoint> points_; //points that live in this object
+
+    int colorFlag_ = 0; //starts empty 00
 
 
 
