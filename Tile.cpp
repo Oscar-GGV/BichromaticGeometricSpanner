@@ -11,6 +11,8 @@ Tile::Tile(int i, int j) : i_(i), j_(j){}//constructor  given i and j create obj
 void Tile::addPoint(const ColoredPoint& p) //used to add points that pertaun to the tile
 {
     points_.push_back(p); //add to the vertext of points within the tile
+    colorFlag_ |= p.isRed ? RED_SEEN : BLUE_SEEN; //if point is red or in red seen otherwise or in blue seen
+    //or turns a bit on
 }
 
 const std::vector<ColoredPoint>& Tile::getPoints() const //returns the points in the vertex within the tile
@@ -27,4 +29,19 @@ size_t Tile::size() const //returns how many points are in the tile
 int Tile::getI() const { return i_; } //returns the i variable of tile
 
 int Tile::getJ() const { return j_; } //returns the j variable of tile
+
+int Tile::colorFlag() const
+{
+    return colorFlag_;
+}
+
+bool Tile::isMonochromatic() const
+{
+    return colorFlag_== RED_SEEN || colorFlag_ == BLUE_SEEN; //returns true of colorFlag_ is exactly 1 or 2
+}
+
+bool Tile::isBichromatic() const
+{
+    return colorFlag_ == (RED_SEEN | BLUE_SEEN); // == 3
+}
 
