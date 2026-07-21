@@ -9,6 +9,8 @@
 
 #include "paperMath.h"
 
+#include "TileGrid.h"
+
 
 int main()
 {
@@ -17,6 +19,7 @@ int main()
 
     //epsilon = (0 to 1) non-inclusive
     double epsilon = InputHelper::getEpsilon(); //uses the getEpsilon function from InputHelper
+    double delta = paperMath::calcDelta(epsilon);
 
     std::cout << "How many points? ";
     int number = InputHelper::checkInt(); //uses checkInt from InputHelper
@@ -31,8 +34,6 @@ int main()
         ColoredPoint point;
         std::cout << "x: ";
         double x = InputHelper::checkDouble(); //uses checkDouble method in InputHelper
-        double delta = paperMath::calcDelta(epsilon);
-        x *= delta; //transforms x so that it can be placed into the quadtree
         std::cout << "y: ";
         double y = InputHelper::checkDouble(); //uses checkDouble method in InputHelper
        // std::cout << "\n;";
@@ -41,6 +42,15 @@ int main()
         point.point = Kernel::Point_2(x,y);
         points.push_back(point);
     }
+    //grid tile
+    TileGrid grid(1.0, delta); //width 1, height delta THIS IS THE CASE FOR theta = 0, lamda = 1
+
+    for (const auto& p : points)
+    {
+        grid.insertPoint(p);
+    }
+
+    std::cout << "Tiles created: " << grid.tileCount() << std::endl;
  /*for (ColoredPoint i : points)
  {
      std::cout << i.point << i.isRed << std::endl;
