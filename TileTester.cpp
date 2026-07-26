@@ -75,6 +75,15 @@ int main()
     if (f)
     {
         std::cout <<"[I, J]= " << f->getI() << "," << f->getJ() << " " << "colorFlag= " << f->colorFlag() << " monochromatic= " << f->isMonochromatic() << " bichromatic= " <<f->isBichromatic() << "\n";
+        const ColoredPoint* lb = f->leftmostBlue();
+        if (lb)
+        {
+            std::cout << " Leftmost Blue point is " << lb->point.x() << ", " << lb->point.y();
+        }
+        else
+        {
+            std::cout << " Leftmost Blue point is null";
+        }
 
     }
 

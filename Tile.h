@@ -29,6 +29,11 @@ public:
 
     bool isBichromatic() const; //true if 3
 
+    const ColoredPoint* leftmostRed() const;
+    const ColoredPoint* rightmostRed() const;
+    const ColoredPoint* leftmostBlue() const;
+    const ColoredPoint* rightmostBlue() const;
+
 private:
 
     int i_, j_;
@@ -36,6 +41,11 @@ private:
     std::vector<ColoredPoint> points_; //points that live in this object
 
     int colorFlag_ = 0; //starts empty 00
+
+    int leftmostRed_ = -1;
+    int rightmostRed_ = -1;
+    int leftmostBlue_ = -1;
+    int rightmostBlue_ = -1;
 
 
 
