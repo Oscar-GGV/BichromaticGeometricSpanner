@@ -36,5 +36,10 @@ size_t TileGrid::tileCount() const
 
 }
 
+Tile* TileGrid::getTileForPoint(const ColoredPoint& p)
+{
+    auto [i, j] = computeIndex(p);
+    return getTile(i, j);
+}
 
 

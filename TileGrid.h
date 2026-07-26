@@ -19,6 +19,8 @@ class TileGrid
 
     size_t tileCount() const; //returns how many tiles currently exist in the grid ~const doesnt change anything abt the obj
 
+    Tile* getTileForPoint(const ColoredPoint& p); //given a point return the tile or nullptr if empty
+
 
 private: //only reachable from inside TileGrid
     std::pair<int, int> computeIndex(const ColoredPoint& p) const; //::pair bundles two values together ~here two ints i, j
