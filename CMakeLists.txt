@@ -21,6 +21,11 @@ add_executable(BichromaticGeometricSpanner
         TileGrid.h
         PairHash.cpp
         PairHash.h
+        SpannerBuilder.cpp
+        SpannerBuilder.h
+        Graph.cpp
+        Graph.h
+        GraphTester.cpp
 )
 add_executable(tileTester
 TileTester.cpp
@@ -37,6 +42,26 @@ TileTester.cpp
         PairHash.cpp
         PairHash.h
         )
+
+add_executable(GraphTester
+GraphTester.cpp
+        Graph.cpp
+        Graph.h
+        ColoredPoint.cpp
+        ColoredPoint.h
+        InputHelper.cpp
+        InputHelper.h
+        paperMath.cpp
+        paperMath.h
+        Tile.cpp
+        Tile.h
+        TileGrid.cpp
+        TileGrid.h
+        PairHash.cpp
+        PairHash.h
+)
+
+
 target_link_libraries(tileTester
         PRIVATE
         CGAL::CGAL
@@ -44,6 +69,12 @@ target_link_libraries(tileTester
 )
 
 target_link_libraries(BichromaticGeometricSpanner
+        PRIVATE
+        CGAL::CGAL
+        Eigen3::Eigen
+)
+
+target_link_libraries(GraphTester
         PRIVATE
         CGAL::CGAL
         Eigen3::Eigen
