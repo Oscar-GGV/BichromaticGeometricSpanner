@@ -18,6 +18,91 @@ Features:
   - There is a collection of tiles held within an unordered_tree, Key is (i, j) and the value is the tile itself with the collection of points within it
   - created a test to check the functionality of the tiles and tile flags/grid in general
 
+UML Class Diagram:
+```mermaid
+classDiagram
+
+class ColoredPoint{
+    +Point_2 point
+    +bool isRed
+    +int number
+}
+
+class Tile{
+    -int i_
+    -int j_
+    -vector~ColoredPoint~ points_
+    -int colorFlag_
+    -int leftmostRed_
+    -int rightmostRed_
+    -int leftmostBlue_
+    -int rightmostBlue_
+
+    +addPoint(p)
+    +getPoints()
+    +size()
+    +colorFlag()
+    +isMonochromatic()
+    +isBichromatic()
+    +leftmostRed()
+    +rightmostRed()
+    +leftmostBlue()
+    +rightmostBlue()
+}
+
+class TileGrid{
+    -double width_
+    -double height_
+    -unordered_map tileMap_
+
+    +insertPoint(p)
+    +getTile(i,j)
+    +getTileForPoint(p)
+    +tileCount()
+}
+
+class Graph{
+    -vector edges_
+    -set edgeIds_
+
+    +addEdge(a,b)
+    +getEdges()
+    +edgeCount()
+}
+
+class Neighborhood{
+    +bool hasRed
+    +bool hasBlue
+
+    +isMonochromatic()
+    +isBichromatic()
+}
+
+class SpannerBuilder
+
+class InputHelper{
+    +getEpsilon()
+    +checkDouble()
+    +checkInt()
+    +redChecker()
+}
+
+class paperMath{
+    +calcDelta()
+    +calcPhi()
+    +calcK()
+}
+
+class PairHash
+
+Tile *-- ColoredPoint : stores
+TileGrid *-- Tile : contains
+Graph --> ColoredPoint : connects
+Neighborhood ..> TileGrid : queries
+TileGrid ..> PairHash : hashing
+SpannerBuilder ..> TileGrid : builds from
+```
+
 Work in Progress:
   - creating logic for the four cases described in the article
   - create a user interface that shows the user all of the edges taken using the algorithm
