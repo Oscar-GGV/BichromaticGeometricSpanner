@@ -29,6 +29,9 @@ public:
 
     bool isBichromatic() const; //true if 3
 
+    bool hasRed() const;
+    bool hasBlue() const;
+
     const ColoredPoint* leftmostRed() const;
     const ColoredPoint* rightmostRed() const;
     const ColoredPoint* leftmostBlue() const;

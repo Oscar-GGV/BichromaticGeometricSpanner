@@ -55,6 +55,15 @@ bool Tile::isBichromatic() const
     return colorFlag_ == (RED_SEEN | BLUE_SEEN); // == 3
 }
 
+bool Tile::hasRed() const
+{
+    return colorFlag_ & RED_SEEN;
+}
+bool Tile::hasBlue() const
+{
+    return colorFlag_ & BLUE_SEEN;
+}
+
 const ColoredPoint* Tile::leftmostRed() const
 {
     return leftmostRed_ == -1 ? nullptr : &points_[leftmostRed_];

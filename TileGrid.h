@@ -22,6 +22,14 @@ class TileGrid
     Tile* getTileForPoint(const ColoredPoint& p); //given a point return the tile or nullptr if empty
 
 
+
+    auto begin() { return tileMap_.begin(); }
+    auto end()   { return tileMap_.end(); }
+
+    auto begin() const { return tileMap_.begin(); }
+    auto end()   const { return tileMap_.end(); }
+
+
 private: //only reachable from inside TileGrid
     std::pair<int, int> computeIndex(const ColoredPoint& p) const; //::pair bundles two values together ~here two ints i, j
     //takes a point works out which tile it belongs to ~used by insert point
