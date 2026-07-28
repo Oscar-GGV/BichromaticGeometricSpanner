@@ -13,7 +13,7 @@
 
 #include "paperMath.h"
 
-#include "neighborhood.h"
+#include "Neighborhood.h"
 int main()
 {
     /*
@@ -72,6 +72,19 @@ int main()
     Neighborhood n00_after = buildNeighborhood(grid, 0, 0);
     std::cout << "After adding blue in corner (1,1) -> hasBlue: " << n00_after.hasBlue << " (expect 1)\n";
     std::cout << "isBichromatic: " << n00_after.isBichromatic() << " (expect 1)\n";
+    std::cout << "----------------\n";
+
+    //new test to see if new function work in identifying rr, lr, rb, lb
+    const ColoredPoint* rr = rightmostRedInNeighborhood(grid, 0, 0);
+    const ColoredPoint* lr = leftmostRedInNeighborhood(grid, 0, 0);
+    const ColoredPoint* rb = rightmostBlueInNeighborhood(grid, 0, 0);
+    const ColoredPoint* lb = leftmostBlueInNeighborhood(grid, 0, 0);
+
+    std::cout << "rightmostRed x: " << (rr ? rr->point.x() : -999) << " (expect 1.5, from tile i=1)\n";
+    std::cout << "leftmostRed x: "  << (lr ? lr->point.x() : -999) << " (expect -0.5, from tile i=-1)\n";
+    std::cout << "rightmostBlue number: " << (rb ? rb->number : -1) << " (expect the id of point b, only blue point)\n";
+    std::cout << "leftmostBlue number: "  << (lb ? lb->number : -1) << " (expect same id, only blue point)\n";
+    std::cout << "-------------\n";
 
     //this point is in tile (2,0) it should not be a part of (0,0)
     //to use this specific part of the test comment out the added point above
@@ -84,5 +97,9 @@ int main()
     Neighborhood n00_far = buildNeighborhood(grid, 0, 0);
     // this should be unchanged from n00_after, since (2,0) is out of range
     std::cout << "Still isBichromatic after far blue: " << n00_far.isBichromatic() << " (expect 0 if commented out the last blue point at (1,1), otherwise expect 1\n";
+
+    const ColoredPoint* rb_after_far = rightmostBlueInNeighborhood(grid, 0, 0);
+    std::cout << "rightmostBlue number after far blue added: " << (rb_after_far ? rb_after_far->number : -1)
+               << " (expect same id as before — corner blue, NOT farBlue's id)\n";
 
 }

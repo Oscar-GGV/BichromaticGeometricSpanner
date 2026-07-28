@@ -15,8 +15,13 @@ struct Neighborhood
     bool isBichromatic() const; //true if 3
 
 
+
 };
 
 Neighborhood buildNeighborhood(TileGrid& grid, int i, int j);
 
+const ColoredPoint* rightmostRedInNeighborhood(TileGrid& grid, int i, int j);
+const ColoredPoint* leftmostBlueInNeighborhood(TileGrid& grid, int i, int j);
+const ColoredPoint* rightmostBlueInNeighborhood(TileGrid& grid, int i, int j);
+const ColoredPoint* leftmostRedInNeighborhood(TileGrid& grid, int i, int j);
 #endif //BICHROMATICGEOMETRICSPANNER_NEIGHBORHOOD_H

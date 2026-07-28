@@ -5,7 +5,7 @@
 #ifndef BICHROMATICGEOMETRICSPANNER_TILEGRID_H
 #define BICHROMATICGEOMETRICSPANNER_TILEGRID_H
 #include "Tile.h"
-#include "Pairhash.h"
+#include "PairHash.h"
 
 class TileGrid
 {
