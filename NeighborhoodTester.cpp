@@ -59,7 +59,7 @@ int main()
     }
     Neighborhood n00 = buildNeighborhood(grid, 0, 0); //neighborhood centered at (0,0)
     std::cout << "All 9 tiles red -> hasRed: " << n00.hasRed << " (expect 1)\n"; //all 9 points are red
-    std::cout << "All 9 tiles red -> hasBlue: " << n00.hasBlue << " (expect 0)\n"; //there is no blue point so far.. should be 0
+    std::cout << "All 9 tiles red -> hasBlue: " << n00.hasBlue << " (expect 0)\n"; //there is no blue point so far. should be 0
     std::cout << "All 9 tiles red -> isMonochromatic: " << n00.isMonochromatic() << " (expect 1)\n";
     std::cout << "-------------\n";
     //now a new point is added that is blue
