@@ -22,26 +22,31 @@ UML Class Diagram:
 ```mermaid
 classDiagram
 
-class ColoredPoint{
+class ColoredPoint {
+    <<struct>>
     +Point_2 point
     +bool isRed
     +int number
 }
 
-class Tile{
+class Tile {
     -int i_
     -int j_
     -vector~ColoredPoint~ points_
     -int colorFlag_
-    -int leftmostRed_
-    -int rightmostRed_
-    -int leftmostBlue_
-    -int rightmostBlue_
+    -const ColoredPoint* leftmostRed_
+    -const ColoredPoint* rightmostRed_
+    -const ColoredPoint* leftmostBlue_
+    -const ColoredPoint* rightmostBlue_
 
+    +Tile(i,j)
     +addPoint(p)
     +getPoints()
     +size()
-    +colorFlag()
+    +getI()
+    +getJ()
+    +hasRed()
+    +hasBlue()
     +isMonochromatic()
     +isBichromatic()
     +leftmostRed()
@@ -50,59 +55,67 @@ class Tile{
     +rightmostBlue()
 }
 
-class TileGrid{
-    -double width_
-    -double height_
-    -unordered_map tileMap_
+class TileGrid {
+    -double tileSize_
+    -unordered_map~pair<int,int>,Tile,PairHash~ tiles_
 
+    +TileGrid(tileSize)
     +insertPoint(p)
     +getTile(i,j)
     +getTileForPoint(p)
     +tileCount()
+    +begin()
+    +end()
 }
 
-class Graph{
-    -vector edges_
-    -set edgeIds_
+class Neighborhood {
+    <<struct>>
+    +bool hasRed
+    +bool hasBlue
+    +isMonochromatic()
+    +isBichromatic()
+}
+
+class Graph {
+    -vector~pair<ColoredPoint,ColoredPoint>~ edges_
+    -set~pair<int,int>~ edgeIds_
 
     +addEdge(a,b)
     +getEdges()
     +edgeCount()
 }
 
-class Neighborhood{
-    +bool hasRed
-    +bool hasBlue
-
-    +isMonochromatic()
-    +isBichromatic()
+class PairHash {
+    <<functor>>
+    +operator()(pair<int,int>)
 }
 
-class SpannerBuilder
+class paperMath {
+    <<utility>>
+    +calcDelta()
+    +calcPhi()
+    +calcK()
+}
 
-class InputHelper{
+class InputHelper {
+    <<utility>>
     +getEpsilon()
     +checkDouble()
     +checkInt()
     +redChecker()
 }
 
-class paperMath{
-    +calcDelta()
-    +calcPhi()
-    +calcK()
-}
-
-class PairHash
+class SpannerBuilder
 
 Tile *-- ColoredPoint : stores
-TileGrid *-- Tile : contains
-Graph --> ColoredPoint : connects
-Neighborhood ..> TileGrid : queries
-TileGrid ..> PairHash : hashing
-SpannerBuilder ..> TileGrid : builds from
+TileGrid *-- Tile : owns
+TileGrid ..> PairHash : uses hash
+Graph --> ColoredPoint : edge endpoints
+Neighborhood ..> TileGrid : neighborhood queries
+Neighborhood ..> ColoredPoint : returns pointers
+SpannerBuilder ..> TileGrid
+SpannerBuilder ..> Graph
 ```
-
 Work in Progress:
   - creating logic for the four cases described in the article
   - create a user interface that shows the user all of the edges taken using the algorithm
