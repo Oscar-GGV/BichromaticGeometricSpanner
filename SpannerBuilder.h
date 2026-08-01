@@ -4,11 +4,10 @@
 
 #ifndef BICHROMATICGEOMETRICSPANNER_SPANNERBUILDER_H
 #define BICHROMATICGEOMETRICSPANNER_SPANNERBUILDER_H
+#include "TileGrid.h"
+#include "Graph.h"
 
-
-class SpannerBuilder
-{
-};
+Graph buildSpanner(TileGrid& grid);
 
 
 #endif //BICHROMATICGEOMETRICSPANNER_SPANNERBUILDER_H

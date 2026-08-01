@@ -29,6 +29,7 @@ add_executable(BichromaticGeometricSpanner
         Neighborhood.cpp
         Neighborhood.h
         NeighborhoodTester.cpp
+        SpannerBuilderTester.cpp
 )
 add_executable(tileTester
 TileTester.cpp
@@ -82,6 +83,34 @@ Neighborhood.h
         TileGrid.h
         PairHash.cpp
         PairHash.h)
+
+add_executable(SpannerBuilderTester
+        SpannerBuilderTester.cpp
+        SpannerBuilder.cpp
+        SpannerBuilder.h
+        Neighborhood.cpp
+        Neighborhood.h
+        Graph.cpp
+        Graph.h
+        ColoredPoint.cpp
+        ColoredPoint.h
+        InputHelper.cpp
+        InputHelper.h
+        paperMath.cpp
+        paperMath.h
+        Tile.cpp
+        Tile.h
+        TileGrid.cpp
+        TileGrid.h
+        PairHash.cpp
+        PairHash.h
+)
+
+target_link_libraries(SpannerBuilderTester
+        PRIVATE
+        CGAL::CGAL
+        Eigen3::Eigen
+)
 
 
 target_link_libraries(tileTester
