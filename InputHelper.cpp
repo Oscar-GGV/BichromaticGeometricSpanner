@@ -11,7 +11,7 @@ double InputHelper::getEpsilon()
     double epsilon;
     while (true) //infinite loop, only way out is to break
     {
-        std::cout << "Epsilon must be between 0 < epsilon < 1 "; //always say this
+        std::cout << "Epsilon must be between 0 < epsilon <= 1 "; //always say this
 
         if (!(std::cin >> epsilon)) //did reading the number fail, fail = false then fail! = true so execute
         {
@@ -20,7 +20,7 @@ double InputHelper::getEpsilon()
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard everything up until a new line
             continue;
         }
-        if (epsilon > 0 && epsilon < 1)
+        if (epsilon > 0 && epsilon <= 1)
         {
             return epsilon; //if epsilon is between 0 and 1 break out and use it
         }

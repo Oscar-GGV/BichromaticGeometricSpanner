@@ -19,7 +19,7 @@ int main()
     std::vector<ColoredPoint> points;
     ColoredPoint one;
     //all points are relatively close to eachother to test tile size
-    one.point = Kernel::Point_2(1.0,2.0);
+    one.point = Kernel::Point_2(1,1);
     one.isRed = true;
     points.push_back(one);
     ColoredPoint two;
