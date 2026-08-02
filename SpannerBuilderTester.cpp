@@ -57,6 +57,58 @@ int main()
     }
     Graph G = buildSpanner(grid);
     std::cout << "Edge count:" << G.edgeCount() << "\n";
+    /* Case 0 Expect 0 edges:
+    Epsilon: 0.7
+    How many points? 2
+    x: 0.5
+    y: 0.05
+    color: 0
+    x: 10.5
+    y: 0.05
+    color: 0
+
+
+    Case 1 : expect 1 edge
+    Epsilon: 0.7
+    How many points? 2
+    x: 0.5
+    y: 0.05
+    color: 0
+    x: 10.5
+    y: 0.05
+    color: 1
+
+
+    Case 3: expect 2 edges
+    Epsilon: 0.7
+    How many points? 4
+    x: 0.5
+    y: 0.05
+    color: 0
+    x: 0.5
+    y: 0.15
+    color: 1
+    x: 10.5
+    y: 0.05
+    color: 1
+    x: 10.5
+    y: 0.15
+    color: 0
+
+
+    case 2: expect 1 edge
+    Epsilon: 0.7
+    How many points? 3
+    x: 0.5
+    y: 0.05
+    color: 0
+    x: 10.5
+    y: 0.05
+    color: 1
+    x: 10.5
+    y: 0.15
+    color: 0
+    */
 
 
 }
