@@ -111,5 +111,11 @@ int main()
     */
 
 
+    //edge output
+    for (const auto& [a, b] : G.getEdges())
+    {
+        std::cout << "Edge " << a.number << " (" << (a.isRed ? "Red" : "Blue") << ") -- " << b.number << " (" << (b.isRed ? "Red" : "blue") << ") " << "[" << a.point.x() << "," << a.point.y() << "] -- [" << b.point.x() << "," << b.point.y() << "]\n";
+    }
+
 }
 
