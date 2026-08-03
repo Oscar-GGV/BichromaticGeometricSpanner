@@ -3,6 +3,21 @@ by the Authors Theodore Fung, Csaba D. Tóth
 
 Overview:
   This project implements the algorithm described in Bichromatic (3 + ε)-Spanners in the Plane. The implementation constructs a sparse geometric graph connecting red and blue points while approximating shortest-path distances by a stretch factor of 3+ε.
+
+How to Run:
+
+Run the executable from the project root directory, and when prompted for a points file, enter `points.txt` (or the path to your own points file, relative to the project root).
+
+Points file format:
+One point per line: `x y color`, where `color` is `0` for red or `1` for blue.
+
+Example:
+```
+0.5 0.05 0
+0.5 0.15 1
+10.5 0.05 1
+10.5 0.15 0
+```
   
 Theodore Fung, Csaba D. Tóth
 "Bichromatic Geometric Spanners"
