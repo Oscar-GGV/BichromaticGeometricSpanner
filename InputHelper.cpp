@@ -4,6 +4,7 @@
 
 #include "InputHelper.h"
 #include <iostream>
+#include <fstream>
 #include <limits>
 
 double InputHelper::getEpsilon()
@@ -86,13 +87,43 @@ bool InputHelper::redChecker()
             {
                 return true;
             }
-             // is blue
+            // is blue
 
-                return false;
+            return false;
 
         }
 
         //else try again
-            std::cout << "Must be 1 or 0\n";
+        std::cout << "Must be 1 or 0\n";
     }
 }
+
+    //filereader
+    std::vector<ColoredPoint> InputHelper::readPointsFromFile(const std::string& filename)
+    {
+        std::vector<ColoredPoint> points;
+        std::ifstream file(filename);
+
+        if (!file.is_open())
+        {
+            std::cout << "Something went wrong with " << filename << "\n";
+            return points;
+        }
+    int idCounter = 0;
+    double x, y;
+    int colorFlag;
+
+    while (file >> x >> y >> colorFlag)
+    {
+        ColoredPoint p;
+        p.point = Kernel::Point_2(x,y);
+        p.isRed = (colorFlag == 0);
+        p.number = idCounter;
+        points.push_back(p);
+    }
+
+    file.close();
+    return points;
+    }
+
+
