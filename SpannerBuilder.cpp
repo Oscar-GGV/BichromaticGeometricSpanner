@@ -26,7 +26,7 @@ void case1(Graph& G, TileGrid& grid, Tile& a, Tile& b, int i, int j, bool aIsRed
     else
     {
         const ColoredPoint* bStar = rightmostBlueInNeighborhood(grid, i, j);
-        const ColoredPoint* rStar = leftmostBlueInNeighborhood(grid, i + MU_PLUS_1, j);
+        const ColoredPoint* rStar = leftmostRedInNeighborhood(grid, i + MU_PLUS_1, j);
 
         for (const auto& p : b.getPoints())
             if (p.isRed) G.addEdge(*bStar, p);
