@@ -9,6 +9,12 @@ find_package(Eigen3 REQUIRED)
 
 add_executable(BichromaticGeometricSpanner
         main.cpp
+        SpannerBuilder.cpp
+        SpannerBuilder.h
+        Neighborhood.cpp
+        Neighborhood.h
+        Graph.cpp
+        Graph.h
         ColoredPoint.cpp
         ColoredPoint.h
         InputHelper.cpp
@@ -21,15 +27,6 @@ add_executable(BichromaticGeometricSpanner
         TileGrid.h
         PairHash.cpp
         PairHash.h
-        SpannerBuilder.cpp
-        SpannerBuilder.h
-        Graph.cpp
-        Graph.h
-        GraphTester.cpp
-        Neighborhood.cpp
-        Neighborhood.h
-        NeighborhoodTester.cpp
-        SpannerBuilderTester.cpp
 )
 add_executable(tileTester
 TileTester.cpp

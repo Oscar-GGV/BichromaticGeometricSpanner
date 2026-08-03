@@ -4,7 +4,8 @@
 
 #ifndef BICHROMATICGEOMETRICSPANNER_INPUTHELPER_H
 #define BICHROMATICGEOMETRICSPANNER_INPUTHELPER_H
-
+#include <vector>
+#include "ColoredPoint.h"
 
 class InputHelper
 {
@@ -16,6 +17,9 @@ class InputHelper
     static int checkInt();
 
     static bool redChecker();
+
+    //Filereading
+    static std::vector<ColoredPoint> readPointsFromFile(const std::string& filename);
 
 };
 
