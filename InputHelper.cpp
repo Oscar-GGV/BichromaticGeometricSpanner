@@ -118,7 +118,7 @@ bool InputHelper::redChecker()
         ColoredPoint p;
         p.point = Kernel::Point_2(x,y);
         p.isRed = (colorFlag == 0);
-        p.number = idCounter;
+        p.number = idCounter++;
         points.push_back(p);
     }
 
