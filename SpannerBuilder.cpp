@@ -49,27 +49,27 @@ void case2(Graph& G, TileGrid& grid, Tile& a, Tile& b, int i, int j, bool aIsMon
             const ColoredPoint* bStar = leftmostBlueInNeighborhood(grid, i + MU_PLUS_1, j);
             for (const auto& p : a.getPoints())
                 if (p.isRed) G.addEdge(*bStar, p);
-                else
-                {
-                    const ColoredPoint* rStarStar = leftmostRedInNeighborhood(grid, i + MU_PLUS_1, j);
-                    for (const auto& p : a.getPoints())
-                        if (!p.isRed) G.addEdge(*rStarStar, p);
-                }
         }
         else
         {
-            if (b.hasRed())
-            {
-                const ColoredPoint* bStar = leftmostBlueInNeighborhood(grid, i, j);
-                for (const auto& p : b.getPoints())
-                    if (p.isRed) G.addEdge(*bStar, p);
-                    else
-                    {
-                        const ColoredPoint* rStarStar = leftmostRedInNeighborhood(grid, i, j);
-                        for (const auto& p : b.getPoints())
-                            if (!p.isRed) G.addEdge(*rStarStar, p);
-                    }
-            }
+            const ColoredPoint* rStarStar = leftmostRedInNeighborhood(grid, i + MU_PLUS_1, j);
+            for (const auto& p : a.getPoints())
+                if (!p.isRed) G.addEdge(*rStarStar, p);
+        }
+    }
+    else
+    {
+        if (b.hasRed())
+        {
+            const ColoredPoint* bStar = leftmostBlueInNeighborhood(grid, i, j);
+            for (const auto& p : b.getPoints())
+                if (p.isRed) G.addEdge(*bStar, p);
+        }
+        else
+        {
+            const ColoredPoint* rStarStar = leftmostRedInNeighborhood(grid, i, j);
+            for (const auto& p : b.getPoints())
+                if (!p.isRed) G.addEdge(*rStarStar, p);
         }
     }
 }
