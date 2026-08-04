@@ -5,7 +5,7 @@
 #ifndef BICHROMATICGEOMETRICSPANNER_PAPERMATH_H
 #define BICHROMATICGEOMETRICSPANNER_PAPERMATH_H
 
-
+#include <vector>
 class paperMath
 {
 public:
@@ -13,7 +13,9 @@ public:
 
     static double calcPhi(double delta, int mu);
 
-    static double calcK(double phi);
+    static int calcK(double phi);
+
+    std::vector<double> generatePhiSet(int k);
 
 };
 #endif //BICHROMATICGEOMETRICSPANNER_PAPERMATH_H

@@ -17,9 +17,20 @@ double paperMath::calcPhi(double delta, int mu) //double in radians returned
     return phi;
 }
 
-double paperMath::calcK(double phi)
+int paperMath::calcK(double phi)
 {
     double pi = std::acos(-1.0);
-    double k = pi/phi;\
+    int k = static_cast<int>(std::ceil(pi/phi));
 return k;
+}
+//discrete set of angles
+std::vector<double> paperMath::generatePhiSet(int k)
+{
+    std::vector<double> angles;
+    double pi = std::acos(-1.0);
+    for (int r = 0; r < k; r++)
+    {
+        angles.push_back(2.0 * r * pi/k);
+    }
+    return angles;
 }
