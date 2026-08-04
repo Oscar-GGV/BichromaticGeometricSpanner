@@ -37,5 +37,5 @@ int main()
                    << b.point.x() << "," << b.point.y() << "]\n";
     }
     return 0;
-
+//if you run the point.txt you should get 128 edges
 }
