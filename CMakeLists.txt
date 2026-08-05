@@ -7,6 +7,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(CGAL REQUIRED)
 find_package(Eigen3 REQUIRED)
 
+include(FetchContent)
+FetchContent_Declare(
+        SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 2.6.1
+)
+FetchContent_MakeAvailable(SFML)
+
+
 add_executable(BichromaticGeometricSpanner
         main.cpp
         SpannerBuilder.cpp
@@ -101,6 +110,37 @@ add_executable(SpannerBuilderTester
         TileGrid.h
         PairHash.cpp
         PairHash.h
+)
+
+add_executable(SpannerVisualizer
+        SpannerVisualizer.cpp
+        SpannerBuilder.cpp
+        SpannerBuilder.h
+        Neighborhood.cpp
+        Neighborhood.h
+        Graph.cpp
+        Graph.h
+        ColoredPoint.cpp
+        ColoredPoint.h
+        InputHelper.cpp
+        InputHelper.h
+        paperMath.cpp
+        paperMath.h
+        Tile.cpp
+        Tile.h
+        TileGrid.cpp
+        TileGrid.h
+        PairHash.cpp
+        PairHash.h
+)
+
+target_link_libraries(SpannerVisualizer
+        PRIVATE
+        sfml-graphics
+        sfml-window
+        sfml-system
+        CGAL::CGAL
+        Eigen3::Eigen
 )
 
 target_link_libraries(SpannerBuilderTester
