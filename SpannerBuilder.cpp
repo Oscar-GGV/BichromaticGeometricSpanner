@@ -61,15 +61,15 @@ void case2(Graph& G, TileGrid& grid, Tile& a, Tile& b, int i, int j, bool aIsMon
     {
         if (b.hasRed())
         {
-            const ColoredPoint* bStar = leftmostBlueInNeighborhood(grid, i, j);
+            const ColoredPoint* bStarStar = rightmostBlueInNeighborhood(grid, i, j);  // was leftmost
             for (const auto& p : b.getPoints())
-                if (p.isRed) G.addEdge(*bStar, p);
+                if (p.isRed) G.addEdge(*bStarStar, p);
         }
         else
         {
-            const ColoredPoint* rStarStar = leftmostRedInNeighborhood(grid, i, j);
+            const ColoredPoint* rStar = rightmostRedInNeighborhood(grid, i, j);  // was leftmost
             for (const auto& p : b.getPoints())
-                if (!p.isRed) G.addEdge(*rStarStar, p);
+                if (!p.isRed) G.addEdge(*rStar, p);
         }
     }
 }
