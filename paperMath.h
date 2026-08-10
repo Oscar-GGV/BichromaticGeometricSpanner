@@ -15,7 +15,9 @@ public:
 
     static int calcK(double phi);
 
-    std::vector<double> generatePhiSet(int k);
+    static std::vector<double> generatePhiSet(int k);
+
+    static double calcGamma(int mu);
 
 };
 #endif //BICHROMATICGEOMETRICSPANNER_PAPERMATH_H

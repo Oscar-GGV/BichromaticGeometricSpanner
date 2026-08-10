@@ -86,7 +86,7 @@ int main()
     bool dragging = false;
     sf::Vector2i lastMousePos;
 
-    while (window.isOpen())
+    while (window.isOpen()) //infinite loop
     {
         sf::Event event;
         while (window.pollEvent(event))
