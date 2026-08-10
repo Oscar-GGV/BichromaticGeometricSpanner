@@ -34,3 +34,8 @@ std::vector<double> paperMath::generatePhiSet(int k)
     }
     return angles;
 }
+
+double paperMath::calcGamma(int mu)
+{
+    return std::pow(3.0, 1.0/(mu + 2));
+}
