@@ -9,8 +9,12 @@ Theodore Fung, Csaba D. Tóth
 https://arxiv.org/abs/2607.10062
 
 How to Run:
+Download CGAL EIGEN library
 
 Run the executable from the project root directory, and when prompted for a points file, enter `points.txt` (or the path to your own points file, relative to the project root).
+
+SpannerVisualizer executable is the standard 1 angle, 1 scale, 1 shift that the paper uses to describe cases
+SpannerVisualizer2 executable is the full program
 
 Points file format:
 One point per line: `x y color`, where `color` is `0` for red or `1` for blue.
@@ -37,105 +41,162 @@ Features:
 UML Class Diagram:
 ```mermaid
 classDiagram
-
-class ColoredPoint {
-    <<struct>>
-    +Point_2 point
-    +bool isRed
-    +int number
-}
-
-class Tile {
-    -int i_
-    -int j_
-    -vector~ColoredPoint~ points_
-    -int colorFlag_
-    -const ColoredPoint* leftmostRed_
-    -const ColoredPoint* rightmostRed_
-    -const ColoredPoint* leftmostBlue_
-    -const ColoredPoint* rightmostBlue_
-
-    +Tile(i,j)
-    +addPoint(p)
-    +getPoints()
-    +size()
-    +getI()
-    +getJ()
-    +hasRed()
-    +hasBlue()
-    +isMonochromatic()
-    +isBichromatic()
-    +leftmostRed()
-    +rightmostRed()
-    +leftmostBlue()
-    +rightmostBlue()
-}
-
-class TileGrid {
-    -double tileSize_
-    -unordered_map~pair<int,int>,Tile,PairHash~ tiles_
-
-    +TileGrid(tileSize)
-    +insertPoint(p)
-    +getTile(i,j)
-    +getTileForPoint(p)
-    +tileCount()
-    +begin()
-    +end()
-}
-
-class Neighborhood {
-    <<struct>>
-    +bool hasRed
-    +bool hasBlue
-    +isMonochromatic()
-    +isBichromatic()
-}
-
-class Graph {
-    -vector~pair<ColoredPoint,ColoredPoint>~ edges_
-    -set~pair<int,int>~ edgeIds_
-
-    +addEdge(a,b)
-    +getEdges()
-    +edgeCount()
-}
-
-class PairHash {
-    <<functor>>
-    +operator()(pair<int,int>)
-}
-
-class paperMath {
-    <<utility>>
-    +calcDelta()
-    +calcPhi()
-    +calcK()
-}
-
-class InputHelper {
-    <<utility>>
-    +getEpsilon()
-    +checkDouble()
-    +checkInt()
-    +redChecker()
-}
-
-class SpannerBuilder
-
-Tile *-- ColoredPoint : stores
-TileGrid *-- Tile : owns
-TileGrid ..> PairHash : uses hash
-Graph --> ColoredPoint : edge endpoints
-Neighborhood ..> TileGrid : neighborhood queries
-Neighborhood ..> ColoredPoint : returns pointers
-SpannerBuilder ..> TileGrid
-SpannerBuilder ..> Graph
+    direction LR
+ 
+    class ColoredPoint {
+        <<struct>>
+        +Point_2 point
+        +bool isRed
+        +int number
+    }
+ 
+    class Tile {
+        -int i_
+        -int j_
+        -vector~ColoredPoint~ points_
+        -int colorFlag_
+        -int leftmostRed_
+        -int rightmostRed_
+        -int leftmostBlue_
+        -int rightmostBlue_
+        +Tile(int i, int j)
+        +addPoint(ColoredPoint p) void
+        +getPoints() vector~ColoredPoint~
+        +size() size_t
+        +getI() int
+        +getJ() int
+        +colorFlag() int
+        +isMonochromatic() bool
+        +isBichromatic() bool
+        +hasRed() bool
+        +hasBlue() bool
+        +leftmostRed() ColoredPoint*
+        +rightmostRed() ColoredPoint*
+        +leftmostBlue() ColoredPoint*
+        +rightmostBlue() ColoredPoint*
+    }
+ 
+    class PairHash {
+        <<functor>>
+        +operator()(pair~int,int~) size_t
+    }
+ 
+    class TileGrid {
+        -double width_
+        -double height_
+        -unordered_map~pair~int,int~, Tile, PairHash~ tileMap_
+        +TileGrid(double width, double height)
+        +insertPoint(ColoredPoint p) void
+        +getTile(int i, int j) Tile*
+        +getTileForPoint(ColoredPoint p) Tile*
+        +tileCount() size_t
+        +begin()
+        +end()
+        -computeIndex(ColoredPoint p) pair~int,int~
+    }
+ 
+    class Neighborhood {
+        <<struct>>
+        +bool hasRed
+        +bool hasBlue
+        +isMonochromatic() bool
+        +isBichromatic() bool
+    }
+ 
+    class NeighborhoodFns {
+        <<free functions>>
+        +buildNeighborhood(grid, i, j) Neighborhood
+        +rightmostRedInNeighborhood(grid, i, j) ColoredPoint*
+        +leftmostRedInNeighborhood(grid, i, j) ColoredPoint*
+        +rightmostBlueInNeighborhood(grid, i, j) ColoredPoint*
+        +leftmostBlueInNeighborhood(grid, i, j) ColoredPoint*
+    }
+ 
+    class Graph {
+        -vector~pair~ColoredPoint,ColoredPoint~~ edges_
+        -set~pair~int,int~~ edgeIds_
+        +addEdge(ColoredPoint a, ColoredPoint b) bool
+        +getEdges() vector~pair~ColoredPoint,ColoredPoint~~
+        +edgeCount() size_t
+    }
+ 
+    class SpannerBuilder {
+        <<free functions>>
+        +buildSpanner(TileGrid grid) Graph
+        -case1(G, grid, a, b, i, j, aIsRed) void
+        -case2(G, grid, a, b, i, j, aIsMono) void
+        -case3(G, grid, a, b, i, j) void
+    }
+ 
+    class FullSpannerBuilder {
+        -double epsilon_
+        -int mu_
+        -double delta_
+        -vector~ColoredPoint~ points_
+        -unordered_map~int, ColoredPoint~ pointsByNumber_
+        +FullSpannerBuilder(double epsilon, int mu, vector~ColoredPoint~ points)
+        +buildFullSpanner() Graph
+        -transformPoints(theta, lambda, shifted) vector~ColoredPoint~
+        -findMinPairwiseDistance() double
+        -findBoundingBoxDiagonal() double
+    }
+ 
+    class paperMath {
+        <<utility>>
+        +calcDelta(double epsilon) double
+        +calcPhi(double delta, int mu) double
+        +calcK(double phi) int
+        +generatePhiSet(int k) vector~double~
+        +calcGamma(int mu) double
+        +generateLambdaSet(gamma, pMin, pMax) vector~double~
+        +calcLambdaExponentRange(gamma, minSpacing, maxSpread, mu) pair~int,int~
+    }
+ 
+    class InputHelper {
+        <<utility>>
+        +getEpsilon() double
+        +checkDouble() double
+        +checkInt() int
+        +redChecker() bool
+        +readPointsFromFile(string filename) vector~ColoredPoint~
+    }
+ 
+    class main {
+        <<driver>>
+        +main() int
+    }
+ 
+    %% ---- relationships ----
+    Tile "1" *-- "many" ColoredPoint : stores
+    TileGrid "1" *-- "many" Tile : owns (tileMap_)
+    TileGrid ..> PairHash : hashes (i,j) keys
+    TileGrid ..> ColoredPoint : insertPoint / computeIndex
+ 
+    Neighborhood <.. NeighborhoodFns : builds / returns
+    NeighborhoodFns ..> TileGrid : 3x3 tile scan
+    NeighborhoodFns ..> ColoredPoint : returns pointers
+ 
+    Graph "1" o-- "many" ColoredPoint : edge endpoints
+ 
+    SpannerBuilder ..> TileGrid : iterates tiles
+    SpannerBuilder ..> Neighborhood : classifies tile pair
+    SpannerBuilder ..> NeighborhoodFns : rightmost/leftmost lookups
+    SpannerBuilder ..> Graph : builds & returns
+ 
+    FullSpannerBuilder "1" *-- "many" ColoredPoint : points_ / pointsByNumber_
+    FullSpannerBuilder ..> paperMath : angle/scale math
+    FullSpannerBuilder ..> TileGrid : builds one grid per (theta, lambda, shift)
+    FullSpannerBuilder ..> SpannerBuilder : calls buildSpanner per tiling
+    FullSpannerBuilder ..> Graph : merges edges into finalGraph
+ 
+    main ..> InputHelper : epsilon + points
+    main ..> paperMath : calcDelta
+    main ..> TileGrid : builds grid
+    main ..> SpannerBuilder : buildSpanner
+    main ..> Graph : prints edges
+    InputHelper ..> ColoredPoint : readPointsFromFile
 ```
-Work in Progress:
-  - creating logic for the four cases described in the article
-  - create a user interface that shows the user all of the edges taken using the algorithm
-  - create a way for the user to give large sets of points
+
 
 Dependencies:
 - C++20
