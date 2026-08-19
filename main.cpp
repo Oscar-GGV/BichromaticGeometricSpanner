@@ -5,7 +5,7 @@
 #include "TileGrid.h"
 #include "Graph.h"
 #include "SpannerBuilder.h"
-
+//used for one scale, one angle, one shift
 int main()
 {
     double epsilon = InputHelper::getEpsilon();

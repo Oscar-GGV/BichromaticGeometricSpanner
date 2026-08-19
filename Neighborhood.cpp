@@ -4,19 +4,19 @@
 
 #include "Neighborhood.h"
 
-bool Neighborhood::isMonochromatic() const
+bool Neighborhood::isMonochromatic() const //checks if 3x3 blocks are mono
 {
     return hasRed != hasBlue;
 }
 
-bool Neighborhood::isBichromatic() const
+bool Neighborhood::isBichromatic() const //checks if 3x3 block is bichromatic
 {
     return hasRed && hasBlue;
 }
 
-Neighborhood buildNeighborhood(TileGrid& grid, int i, int j)
+Neighborhood buildNeighborhood(TileGrid& grid, int i, int j) //i and j are the key for the middle tile
 {
-    Neighborhood n;
+    Neighborhood n; //track neighborhood to return neighborhood object
     //3x3 traversal
     for (int di = -1; di <= 1; di++)
     {
