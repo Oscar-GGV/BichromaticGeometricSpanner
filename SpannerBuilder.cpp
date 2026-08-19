@@ -105,6 +105,8 @@ Graph buildSpanner(TileGrid& grid)
         Neighborhood N1 =  buildNeighborhood(grid, i, j);
         Neighborhood N2 =  buildNeighborhood(grid, i + MU_PLUS_1, j);
 
+
+
         if (N1.isMonochromatic() && N2.isMonochromatic())
         {
             bool aIsRed = tileA.hasRed();

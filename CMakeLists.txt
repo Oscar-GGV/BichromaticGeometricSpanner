@@ -133,6 +133,97 @@ add_executable(SpannerVisualizer
         PairHash.cpp
         PairHash.h
 )
+add_executable(FullSpannerBuilder
+        FullSpannerBuilder.cpp
+        FullSpannerBuilder.h
+        SpannerBuilder.cpp
+        SpannerBuilder.h
+        Neighborhood.cpp
+        Neighborhood.h
+        Graph.cpp
+        Graph.h
+        ColoredPoint.cpp
+        ColoredPoint.h
+        InputHelper.cpp
+        InputHelper.h
+        paperMath.cpp
+        paperMath.h
+        Tile.cpp
+        Tile.h
+        TileGrid.cpp
+        TileGrid.h
+        PairHash.cpp
+        PairHash.h
+)
+add_executable(spannerVisualizer2
+spannerVisualizer2.cpp
+        FullSpannerBuilder.cpp
+        FullSpannerBuilder.h
+        SpannerBuilder.cpp
+        SpannerBuilder.h
+        Neighborhood.cpp
+        Neighborhood.h
+        Graph.cpp
+        Graph.h
+        ColoredPoint.cpp
+        ColoredPoint.h
+        InputHelper.cpp
+        InputHelper.h
+        paperMath.cpp
+        paperMath.h
+        Tile.cpp
+        Tile.h
+        TileGrid.cpp
+        TileGrid.h
+        PairHash.cpp
+        PairHash.h
+)
+add_executable(singleTilingTester
+singleTilingTester.cpp
+        SpannerBuilder.cpp
+        SpannerBuilder.h
+        Neighborhood.cpp
+        Neighborhood.h
+        Graph.cpp
+        Graph.h
+        ColoredPoint.cpp
+        ColoredPoint.h
+        InputHelper.cpp
+        InputHelper.h
+        paperMath.cpp
+        paperMath.h
+        Tile.cpp
+        Tile.h
+        TileGrid.cpp
+        TileGrid.h
+        PairHash.cpp
+        PairHash.h)
+
+target_link_libraries(singleTilingTester
+PRIVATE
+        sfml-graphics
+        sfml-window
+        sfml-system
+        CGAL::CGAL
+        Eigen3::Eigen)
+target_link_libraries(spannerVisualizer2
+        PRIVATE
+        sfml-graphics
+        sfml-window
+        sfml-system
+        CGAL::CGAL
+        Eigen3::Eigen
+
+)
+
+target_link_libraries(FullSpannerBuilder
+        PRIVATE
+        sfml-graphics
+        sfml-window
+        sfml-system
+        CGAL::CGAL
+        Eigen3::Eigen
+)
 
 target_link_libraries(SpannerVisualizer
         PRIVATE
